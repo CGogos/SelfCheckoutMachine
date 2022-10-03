@@ -5,12 +5,11 @@ import store.model.items.Item
 class SelfCheckout {
 
   var barcode: String = ""
-  var storeInventory: Map[String, Item] = Map("" -> new Item("error",0.0))
+  var storeInventory: Map[String, Item] = Map()
   var customerCart: List[Item] = List()
 
   def addItemToStore(barcode: String, item: Item): Unit = {
     // This method adds an item to your store's checkout system. It does not add an item to the customer's cart
-    // TODO
     this.storeInventory += (barcode -> item)
   }
 
@@ -23,9 +22,8 @@ class SelfCheckout {
   }
 
   def enterPressed(): Unit = {
-    // TODO
-    // THIS IS NOT WORKING HOW SHOULD BE!!!!!!!
-    this.customerCart :+ this.storeInventory(this.barcode)
+    val itemForCart: Item = this.storeInventory.getOrElse(barcode, new Item("error", 0.0))
+    this.customerCart  = customerCart :+ itemForCart
     this.barcode = ""
   }
 

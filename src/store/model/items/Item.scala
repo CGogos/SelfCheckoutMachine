@@ -1,6 +1,6 @@
 package store.model.items
 
-class Item(val itemDescription: String, var bPrice: Double) {
+class Item(val itemDescription: String = "error", var bPrice: Double = 0.0) {
   // TODO: Complete this class according to the features listed in the HW document
 
   //Returns the description of the item, from the constructor, as a String
