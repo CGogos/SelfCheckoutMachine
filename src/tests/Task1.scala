@@ -15,10 +15,10 @@ class Task1 extends FunSuite {
     assert(testItem.price() - 100.0 < 0.001)  //checking the item price
 
                                                                     // these are
-    testSelfCheckout.addItemToStore("123", testItem)      // adding the item to the store
-    testSelfCheckout.numberPressed(1)                     //typing in the numbers for barcode
+    testSelfCheckout.addItemToStore("020", testItem)      // adding the item to the store
+    testSelfCheckout.numberPressed(0)                     //typing in the numbers for barcode
     testSelfCheckout.numberPressed(2)
-    testSelfCheckout.numberPressed(3)
+    testSelfCheckout.numberPressed(0)
     testSelfCheckout.enterPressed()                               //pressing enter on the keypad
     val cart: List[Item] = testSelfCheckout.itemsInCart()         //putting the cart items in a value (to be checked)
 
@@ -34,8 +34,10 @@ class Task1 extends FunSuite {
     var testItem: Item = new Item("test item", 100.0)
     assert(testItem.description() == "test item")
     assert(testItem.price() - 100.0 < 0.001)
+    var testItem2: Item = new Item("test item 2", 420.0)
 
     testSelfCheckout.addItemToStore("123", testItem)
+    testSelfCheckout.addItemToStore("42069", testItem2)
     testSelfCheckout.numberPressed(1)
     testSelfCheckout.numberPressed(2)
     testSelfCheckout.numberPressed(3)
@@ -47,19 +49,29 @@ class Task1 extends FunSuite {
     testSelfCheckout.numberPressed(3)
     testSelfCheckout.enterPressed()
 
+    testSelfCheckout.numberPressed(4)
+    testSelfCheckout.numberPressed(2)
+    testSelfCheckout.numberPressed(0)
+    testSelfCheckout.numberPressed(6)
+    testSelfCheckout.numberPressed(9)
+    testSelfCheckout.enterPressed()
+
     testSelfCheckout.numberPressed(0)
     testSelfCheckout.numberPressed(0)
     testSelfCheckout.numberPressed(0)
     testSelfCheckout.enterPressed()
 
     val cart: List[Item] = testSelfCheckout.itemsInCart()
-    assert(cart.length == 3)
+    assert(cart.length == 4)
 
     assert(cart.head.description() == "test item")
     assert((cart.head.price() - 69.0).abs < 0.001)
 
     assert(cart.apply(1).description() == "test item")
     assert((cart.apply(1).price() - 69.0).abs < 0.001)
+
+    assert(cart.apply(2).description() == "test item 2")
+    assert((cart.apply(2).price() - 420.0).abs < 0.001)
 
     assert(cart.last.description() == "error")
     assert((cart.last.price() - 0.0).abs < 0.001)
