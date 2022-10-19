@@ -52,15 +52,23 @@ class SelfCheckout {
   }
 
   def subtotal(): Double = {
-    0.0
+    var poosock: Double = 0.0
+    for (itoom <- this.itemsInCart()){
+      poosock += itoom.price()
+    }
+    poosock
   }
 
   def tax(): Double = {
-    0.0
+    var poosock: Double = 0.0
+    for (itoom <- this.itemsInCart()){
+      poosock += itoom.tax()
+    }
+    poosock
   }
 
   def total(): Double = {
-    0.0
+    tax() + subtotal()
   }
 
   def prepareStore(): Unit = {

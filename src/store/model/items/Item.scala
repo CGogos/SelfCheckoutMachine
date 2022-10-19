@@ -27,20 +27,23 @@ class Item(val itemDescription: String = "error", var bPrice: Double = 0.0) {
     actualPrice
   }
 
+
+  def tax(): Double = {
+    val pretaxPrice: Double = this.price()
+    var taxPrice: Double = 0.0
+    for (mod <- modsList) {
+      taxPrice = taxPrice + mod.computeTax(pretaxPrice)
+    }
+    taxPrice
+  }
+
+
   //method named "addModifier" that takes a Modifier as a parameter and returns Unit
 
   //is this how to use the polymorphism?????? prolly not
-  def addModifier(mod: Modifier): Unit = {
-    modsList = modsList :+ mod
+  def addModifier(modifier: Modifier): Unit = {
+    modsList = modsList :+ modifier
   }
 
-  def tax(): Double = {
-    val untaxPrice: Double = price()
-    var taxMoneys: Double = 0.0
-    for (mod <- modsList){
-      taxMoneys += mod.computeTax(untaxPrice)
-    }
-    taxMoneys
-  }
 
 }
