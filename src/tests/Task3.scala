@@ -24,6 +24,33 @@ class Task3 extends FunSuite {
 
   test("shitted"){
 
+    //checking the new enterPressed() functionality
+    testSelfCheckout.numberPressed(1)
+    testSelfCheckout.numberPressed(2)
+    testSelfCheckout.numberPressed(3)
+    testSelfCheckout.enterPressed()
+    assert(testSelfCheckout.displayString() == "")
+    testSelfCheckout.cashPressed()
+    testSelfCheckout.creditPressed()
+    testSelfCheckout.enterPressed()
+    var cart: List[Item] = testSelfCheckout.itemsInCart()
+    assert(cart.head == testItem)
+    assert(cart(1) == testItem)
+    assert(cart.length == 2)
+
+  }
+
+  test("shittedDos"){
+    testSelfCheckout.numberPressed(1)
+    testSelfCheckout.numberPressed(2)
+    testSelfCheckout.numberPressed(3)
+    testSelfCheckout.enterPressed()
+    var cart: List[Item] = testSelfCheckout.itemsInCart()
+    testSelfCheckout.checkoutPressed()
+    assert(testSelfCheckout.displayString() == "cash or credit")
+    testSelfCheckout.cashPressed()
+    cart = testSelfCheckout.itemsInCart()
+    assert(cart.isEmpty)
   }
 
 }

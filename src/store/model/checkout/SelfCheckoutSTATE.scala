@@ -4,9 +4,6 @@ import store.model.items.Item
 
 abstract class SelfCheckoutSTATE(pooCrap: SelfCheckout) {
 
-
-  def addItemToStore(barcode: String, item: Item): Unit = {}
-
   def numberPressed(number: Int) : Unit = {}
 
   def clearPressed(): Unit = {}
@@ -21,10 +18,6 @@ abstract class SelfCheckoutSTATE(pooCrap: SelfCheckout) {
   def creditPressed(): Unit = {}
 
   def loyaltyCardPressed(): Unit = {}
-
-  def displayString(): String
-
-  def itemsInCart(): List[Item]
 
 
 }

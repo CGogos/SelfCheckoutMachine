@@ -5,15 +5,15 @@ import store.model.items.Item
 class SelfCheckout {
 
   var barcode: String = ""
+  var dispStr: String = ""
   var storeInventory: Map[String, Item] = Map()
   var customerCart: List[Item] = List()
 
-  var state = new CheckingOut(this)
+  var state: SelfCheckoutSTATE = new CheckingOut(this)
 
   def addItemToStore(barcode: String, item: Item): Unit = {
-//    // This method adds an item to your store's checkout system. It does not add an item to the customer's cart
-//    this.storeInventory += (barcode -> item)
-    this.state.addItemToStore(barcode,item)
+    // This method adds an item to your store's checkout system. It does not add an item to the customer's cart
+    this.storeInventory += (barcode -> item)
   }
 
   def numberPressed(number: Int): Unit = {
@@ -54,14 +54,11 @@ class SelfCheckout {
   }
 
   def displayString(): String = {
-//    this.barcode
-    " "
-    this.state.displayString()
+    this.dispStr
   }
 
   def itemsInCart(): List[Item] = {
-//    this.customerCart
-    this.state.itemsInCart()
+    this.customerCart
   }
 
   def subtotal(): Double = {

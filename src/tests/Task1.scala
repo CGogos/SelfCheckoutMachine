@@ -67,7 +67,7 @@ class Task1 extends FunSuite {
     assert(cart.head.description() == "test item")
     assert((cart.head.price() - 69.0).abs < 0.001)
 
-    assert(cart.apply(1).description() == "test item")
+    assert(cart(1).description() == "test item")
     assert((cart.apply(1).price() - 69.0).abs < 0.001)
 
     assert(cart.apply(2).description() == "test item 2")
