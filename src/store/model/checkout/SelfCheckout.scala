@@ -8,47 +8,60 @@ class SelfCheckout {
   var storeInventory: Map[String, Item] = Map()
   var customerCart: List[Item] = List()
 
+  var state = new CheckingOut(this)
+
   def addItemToStore(barcode: String, item: Item): Unit = {
-    // This method adds an item to your store's checkout system. It does not add an item to the customer's cart
-    this.storeInventory += (barcode -> item)
+//    // This method adds an item to your store's checkout system. It does not add an item to the customer's cart
+//    this.storeInventory += (barcode -> item)
+    this.state.addItemToStore(barcode,item)
   }
 
   def numberPressed(number: Int): Unit = {
-    this.barcode += number.toString
+//    this.barcode += number.toString
+    this.state.numberPressed(number)
   }
 
   def clearPressed(): Unit = {
-    this.barcode = ""
+//    this.barcode = ""
+    this.state.clearPressed()
   }
 
   def enterPressed(): Unit = {
-    val itemForCart: Item = this.storeInventory.getOrElse(barcode, new Item("error", 0.0))
-    this.customerCart  = customerCart :+ itemForCart
-    this.barcode = ""
+//    val itemForCart: Item = this.storeInventory.getOrElse(barcode, new Item("error", 0.0))
+//    this.customerCart  = customerCart :+ itemForCart
+//    this.barcode = ""
+    this.state.enterPressed()
   }
 
   def checkoutPressed(): Unit = {
     // TODO
+    this.state.checkoutPressed()
   }
 
   def cashPressed(): Unit = {
     // TODO
+    this.state.cashPressed()
   }
 
   def creditPressed(): Unit = {
     // TODO
+    this.state.creditPressed()
   }
 
   def loyaltyCardPressed(): Unit = {
     // TODO
+    this.state.loyaltyCardPressed()
   }
 
   def displayString(): String = {
-    this.barcode
+//    this.barcode
+    " "
+    this.state.displayString()
   }
 
   def itemsInCart(): List[Item] = {
-    this.customerCart
+//    this.customerCart
+    this.state.itemsInCart()
   }
 
   def subtotal(): Double = {
