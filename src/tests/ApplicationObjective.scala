@@ -4,6 +4,20 @@ import org.scalatest.FunSuite
 import store.model.checkout.SelfCheckout
 import store.model.items._  //imports everything in the folder
 
+
+//what needs to be tested:
+//- LoyaltySale class that inherits Modifier
+//	- takes a double that is the percentage of the sale
+//	- the sale price is NOT applied to the item unless 	loyalty card button has been pressed.
+//	- when the customer checks out, sale needs to be 	inactive again
+//- when loyalty card button is pressed, the items in the cart must update to reflect the loyalty sale prices
+//- when loyalty card button is pressed, the items u scan in the future will need to be the loyalty sale price
+//- assume no items or loyalty sale items are created after a customer presses the checkout button
+//- NO TAX applied by a loyalty sale
+//- MUST support multiple items with different percentage sales
+//	- e.g. an item with 20% loyalty sale and another item 	with a 30% loyalty sale, BOTH IN SAME CART
+//
+
 class ApplicationObjective extends FunSuite{
 
   //maybe need to add more methods to modifiers classes
