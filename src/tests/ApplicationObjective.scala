@@ -16,7 +16,7 @@ import store.model.items._  //imports everything in the folder
 //- NO TAX applied by a loyalty sale
 //- MUST support multiple items with different percentage sales
 //	- e.g. an item with 20% loyalty sale and another item 	with a 30% loyalty sale, BOTH IN SAME CART
-//
+
 
 class ApplicationObjective extends FunSuite{
 
@@ -42,18 +42,43 @@ class ApplicationObjective extends FunSuite{
   testSelfCheckout.addItemToStore("123", testItem)
   testSelfCheckout.addItemToStore("42069", testItem2)
 
-  test("shittinFartin"){
+  test("loyalty press prior to cart"){
+    //add the loyalty sale modifier
+    val loyalCustomer: Modifier = new LoyaltySale(50)
+    testItem.addModifier(loyalCustomer)
+
     //adding the items to the cart
     testSelfCheckout.numberPressed(1)
     testSelfCheckout.numberPressed(2)
     testSelfCheckout.numberPressed(3)
     testSelfCheckout.enterPressed()
+    testSelfCheckout.loyaltyCardPressed()
+    assert(compareDoubles(testSelfCheckout.itemsInCart().head.price(), 50.0))
+    testSelfCheckout.loyaltyCardPressed()
+    testSelfCheckout.loyaltyCardPressed()
+    testSelfCheckout.loyaltyCardPressed()
+    assert(compareDoubles(testSelfCheckout.itemsInCart().head.price(), 50.0))
 
-    testSelfCheckout.numberPressed(4)
+    testSelfCheckout.numberPressed(1)
     testSelfCheckout.numberPressed(2)
-    testSelfCheckout.numberPressed(0)
-    testSelfCheckout.numberPressed(6)
-    testSelfCheckout.numberPressed(9)
+    testSelfCheckout.numberPressed(3)
     testSelfCheckout.enterPressed()
+    assert(compareDoubles(testSelfCheckout.itemsInCart()(1).price(),50.0))
+    testSelfCheckout.checkoutPressed()
+    testSelfCheckout.cashPressed()
+
+    //this is a new sale with no loyalty card pressed yet
+    testSelfCheckout.numberPressed(1)
+    testSelfCheckout.numberPressed(2)
+    testSelfCheckout.numberPressed(3)
+    testSelfCheckout.enterPressed()
+    assert(compareDoubles(testSelfCheckout.itemsInCart().head.price(), 100.0))
+
+    //now we will press it
+    testSelfCheckout.checkoutPressed()
+    testSelfCheckout.loyaltyCardPressed()
+    assert(compareDoubles(testSelfCheckout.itemsInCart().head.price(), 50.0))
+
+
   }
 }

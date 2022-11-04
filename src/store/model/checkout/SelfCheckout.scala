@@ -1,6 +1,6 @@
 package store.model.checkout
 
-import store.model.items.Item
+import store.model.items.{Item, LoyalMahBallzAPI, NotLoyal, UrLoyal}
 
 class SelfCheckout {
 
@@ -49,8 +49,12 @@ class SelfCheckout {
   }
 
   def loyaltyCardPressed(): Unit = {
-    // TODO
-    this.state.loyaltyCardPressed()
+    for (item <- storeInventory.values){
+      for (mod <- item.modsList){
+        mod.loyalMaybe = new UrLoyal().loyaltyNumber
+      }
+    }
+
   }
 
   def displayString(): String = {

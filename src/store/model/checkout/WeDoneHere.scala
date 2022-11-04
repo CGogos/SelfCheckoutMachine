@@ -1,5 +1,7 @@
 package store.model.checkout
 
+import store.model.items.{NotLoyal, UrLoyal}
+
 class WeDoneHere(pooCrap: SelfCheckout) extends SelfCheckoutSTATE(pooCrap) {
 
   override def numberPressed(number: Int): Unit = {}
@@ -14,14 +16,24 @@ class WeDoneHere(pooCrap: SelfCheckout) extends SelfCheckoutSTATE(pooCrap) {
     pooCrap.customerCart = List()
     pooCrap.dispStr = ""
     pooCrap.state = new CheckingOut(pooCrap)
+    //need to turn the loyalty sale state back to not loyal when ur done checking out
+    for (item <- pooCrap.storeInventory.values){
+      for (mod <- item.modsList){
+        mod.loyalMaybe = new NotLoyal().loyaltyNumber
+      }
+    }
   }
 
   override def creditPressed(): Unit = {
     pooCrap.customerCart = List()
     pooCrap.dispStr = ""
     pooCrap.state = new CheckingOut(pooCrap)
+    //need to turn the loyalty sale state back to not loyal when ur done checking out
+    for (item <- pooCrap.storeInventory.values) {
+      for (mod <- item.modsList) {
+        mod.loyalMaybe = new NotLoyal().loyaltyNumber
+      }
+    }
   }
-
-  override def loyaltyCardPressed(): Unit = {}
 
 }

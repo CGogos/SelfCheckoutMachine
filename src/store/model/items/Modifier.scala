@@ -2,6 +2,8 @@ package store.model.items
 
 abstract class Modifier {
 
+  var loyalMaybe: Double
+
   // A method named "updatePrice" that takes a Double as a parameter and returns a Double.
   // The input represents the price of an item before the modifier is applied and the method
   // returns the new price with the modifier applied

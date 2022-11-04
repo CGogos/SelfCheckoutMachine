@@ -5,6 +5,7 @@ class Item(val itemDescription: String = "error", var bPrice: Double = 0.0) {
 
   var modsList: List[Modifier] = List()  //setting up the list to hold the modifiers
 
+
   //Returns the description of the item, from the constructor, as a String
   def description(): String = {
     this.itemDescription

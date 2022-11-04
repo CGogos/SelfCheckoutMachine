@@ -1,7 +1,7 @@
 package store.model.checkout
 
 import store.model.checkout.SelfCheckoutSTATE
-import store.model.items.Item
+import store.model.items.{Item, LoyaltySale, Modifier, UrLoyal}
 
 class CheckingOut(pooCrap: SelfCheckout) extends SelfCheckoutSTATE(pooCrap) {
 
@@ -29,7 +29,7 @@ class CheckingOut(pooCrap: SelfCheckout) extends SelfCheckoutSTATE(pooCrap) {
 
   override def creditPressed(): Unit = {}
 
-  override def loyaltyCardPressed(): Unit = {}
+
 
 
 }

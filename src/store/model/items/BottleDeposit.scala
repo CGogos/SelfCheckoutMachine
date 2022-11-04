@@ -2,6 +2,8 @@ package store.model.items
 
 class BottleDeposit(depAmount: Double) extends Modifier {
 
+  override var loyalMaybe = 0.0
+
   //return the input price unmodified
   override def updatePrice(currentP: Double): Double = {
     currentP
